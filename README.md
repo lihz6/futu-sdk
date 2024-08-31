@@ -1,0 +1,35 @@
+## 说明
+
+本 SDK 用于对接[富途 OpenAPI 量化接口](https://openapi.futunn.com/futu-api-doc/intro/intro.html?lang=zh-cn)的网关程序 OpenD. 虽然富途官方提供了配套的[`futu-api`](https://www.npmjs.com/package/futu-api)对接 OpenD, 但如果你在使用 `futu-api` 过程中遇到了一些问题，可以尝试选择[`futu-sdk`](https://www.npmjs.com/package/futu-sdk)来替换。这些问题可能是：
+
+- 模块化接口不一致(`commonjs` 与 `es6` 混用)
+- 依赖缺失(如 `long`, `ws/WebSocket`, `memcpy`)、不兼容(`memcpy`, `node >=0.8 <=0.12`)或过于老旧(如 `bytebuffer`)
+- 缺少类型支持和提示等问题
+
+## 使用
+
+#### 1. 安装
+
+本 SDK 提供的是未经编译的 TypeScript 源码，你可能需要在 [nextjs](https://nextjs.org/), [nestjs](https://nestjs.com/), [create-react-app](https://create-react-app.dev/) 等开发环境下安装使用。
+
+```bash
+$ npm install --save futu-sdk
+```
+
+#### 2. 使用
+
+对应官方[获取交易业务账户列表](https://openapi.futunn.com/futu-api-doc/trade/get-acc-list.html)的例子，`futu-sdk`简化了连接逻辑和请求参数，提供了基于 Promise 的接口和类型支持。
+
+```ts
+import { getWebRequest } from 'futu-sdk';
+
+const webRequest = getWebRequest({ key: '7522027ccf5a06b1' });
+
+const { accList } = await webRequest.GetAccList({ userID: 0, needGeneralSecAccount: true });
+
+console.log(accList);
+```
+
+### 最后
+
+如有任何使用问题，欢迎随时反馈。目前还有大部分接口未补充类型注释(见[utils/fetch.ts](https://github.com/lihz6/futu-sdk/blob/master/utils/fetch.ts)), 也期望一起补充。
