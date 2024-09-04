@@ -1,9 +1,18 @@
 {
   "name": "futu-sdk",
-  "version": "0.0.7",
+  "version": "0.0.9",
   "private": false,
-  "main": "./dist/index.js",
-  "module": "./dist/index.mjs",
+  "type": "module",
+  "exports": {
+    ".": {
+      "require": "./dist/index.cjs",
+      "import": "./dist/index.js"
+    },
+    "./proto": {
+      "require": "./dist/proto.cjs",
+      "import": "./dist/proto.js"
+    }
+  },
   "sideEffects": false,
   "repository": {
     "type": "git",
@@ -13,10 +22,23 @@
     "url": "https://github.com/lihz6/futu-sdk/issues"
   },
   "homepage": "https://github.com/lihz6/futu-sdk",
+  "tsup": {
+    "entry": {
+      "proto": "./proto/index.js",
+      "index": "./src/index.ts"
+    },
+    "format": [
+      "cjs",
+      "esm"
+    ],
+    "splitting": false,
+    "minify": true,
+    "clean": true,
+    "dts": true
+  },
   "scripts": {
-    "proto": "cp ./node_modules/futu-api/proto/*.proto proto/files && pbjs --force-long -t static-module -w es6 proto/files/*.proto | tee proto/proto.js | pbts -o proto/index.d.ts -",
-    "typed": "tsc --allowJs --skipLibCheck -d --emitDeclarationOnly -m nodenext index.ts utils/*.ts proto/index.d.ts --outDir dist",
-    "build": "tsup && npm run typed"
+    "proto": "cp ./node_modules/futu-api/proto/*.proto proto/files && pbjs --force-long -t static-module -w es6 proto/files/*.proto | tee proto/index.js | pbts -o proto/index.d.ts -",
+    "build": "tsup --external futu-sdk/proto"
   },
   "keywords": [
     "futu",
@@ -25,6 +47,9 @@
   ],
   "files": [
     "dist",
+    "src",
+    "proto/files",
+    "proto/index.d.ts",
     "LICENSE",
     "package.json",
     "package-lock.json"
