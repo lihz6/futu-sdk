@@ -22,13 +22,13 @@ $ npm install --save futu-sdk
 
 ```ts
 import { getWebRequest } from 'futu-sdk';
-import { Trd_Common } from 'futu-sdk/proto';
+// import { Trd_Common } from 'futu-sdk/proto';
 
 const webRequest = getWebRequest({ key: '7522027ccf5a06b1' });
 
 const { accList } = await webRequest.GetAccList({ userID: 0, needGeneralSecAccount: true });
 
-console.log(accList?.filter(({ trdEnv }) => trdEnv === Trd_Common.TrdEnv.TrdEnv_Real));
+console.log(accList);
 ```
 
 ### 最后

@@ -1,6 +1,6 @@
 {
   "name": "futu-sdk",
-  "version": "0.0.9",
+  "version": "0.1.1",
   "private": false,
   "type": "module",
   "exports": {
@@ -23,13 +23,9 @@
   },
   "homepage": "https://github.com/lihz6/futu-sdk",
   "tsup": {
-    "entry": {
-      "proto": "./proto/index.js",
-      "index": "./src/index.ts"
-    },
     "format": [
-      "cjs",
-      "esm"
+      "esm",
+      "cjs"
     ],
     "splitting": false,
     "minify": true,
@@ -37,8 +33,9 @@
     "dts": true
   },
   "scripts": {
-    "proto": "cp ./node_modules/futu-api/proto/*.proto proto/files && pbjs --force-long -t static-module -w es6 proto/files/*.proto | tee proto/index.js | pbts -o proto/index.d.ts -",
-    "build": "tsup --external futu-sdk/proto"
+    "proto": "pbjs -t static-module -w es6 node_modules/futu-api/proto/*.proto | tee node_modules/futu-sdk/dist/proto.js | pbts -o node_modules/futu-sdk/dist/proto.d.ts -",
+    "build": "tsup --external futu-sdk/proto --entry.index src/index.ts --entry.proto node_modules/futu-sdk/dist/proto.js",
+    "dist": "npm run proto && npm run build && rsync -a node_modules/futu-api/proto/*.proto dist/files"
   },
   "keywords": [
     "futu",
@@ -47,9 +44,6 @@
   ],
   "files": [
     "dist",
-    "src",
-    "proto/files",
-    "proto/index.d.ts",
     "LICENSE",
     "package.json",
     "package-lock.json"
@@ -59,14 +53,15 @@
   "description": "",
   "dependencies": {
     "@types/long": "^5.0.0",
+    "@types/ws": "^8.5.12",
     "bufferutil": "^4.0.8",
     "long": "^5.2.3",
     "protobufjs": "^7.4.0",
     "ws": "^8.18.0"
   },
   "devDependencies": {
-    "@types/ws": "^8.5.12",
     "futu-api": "^8.5.4508",
+    "futu-sdk": "^0.1.1",
     "protobufjs-cli": "^1.1.3",
     "tsup": "^8.2.4",
     "typescript": "^5.5.4"
