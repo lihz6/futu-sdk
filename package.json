@@ -34,23 +34,33 @@
   },
   "scripts": {
     "proto": "pbjs -t static-module -w es6 node_modules/futu-api/proto/*.proto | tee node_modules/futu-sdk/dist/proto.js | pbts -o node_modules/futu-sdk/dist/proto.d.ts -",
-    "build": "tsup --external futu-sdk/proto --entry.index src/index.ts --entry.proto node_modules/futu-sdk/dist/proto.js",
-    "dist": "npm run proto && npm run build && rsync -a node_modules/futu-api/proto/*.proto dist/files"
+    "build": "tsup --external futu-sdk/proto --entry.index index.ts --entry.proto node_modules/futu-sdk/dist/proto.js",
+    "setup": "npm run proto && npm run build && rsync -a node_modules/futu-api/proto/*.proto dist/files"
   },
   "keywords": [
+    "富途",
     "futu",
+    "futunn",
     "futu-api",
-    "futu-open-api"
+    "futu-open",
+    "futu-opend",
+    "futu-open-api",
+    "node-futu-api"
   ],
   "files": [
     "dist",
+    "fetch",
+    "utils",
+    "index.js",
     "LICENSE",
+    "README.md",
     "package.json",
+    "tsconfig.json",
     "package-lock.json"
   ],
   "author": "Li Hongzhang",
   "license": "ISC",
-  "description": "",
+  "description": "futu-api 的高性能精简易用版；基于*.proto静态编译，提供高性能的多层封装但层层开放的易用接口，获取最原始最完整的量化数据；相较于Python, nodejs更接近Web, 从而轻而易举搭建一个可视化交易站点，这是进行可控量化交易的不二选择。",
   "dependencies": {
     "@types/long": "^5.0.0",
     "@types/ws": "^8.5.12",
