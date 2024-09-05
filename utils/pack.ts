@@ -1,7 +1,7 @@
 const FUTU_SIGN = 'ft-v1.0';
 let nextSession = 1;
 
-export const packBuffer = (cmd: number, protobuf: Uint8Array) => {
+export const encodeBuffer = (cmd: number, protobuf: Uint8Array) => {
   const session = nextSession++;
   const buffer = Buffer.alloc(8 + 4 + 8 + protobuf.byteLength);
   let offset = buffer.write(FUTU_SIGN, 0, 'utf8');
@@ -14,7 +14,7 @@ export const packBuffer = (cmd: number, protobuf: Uint8Array) => {
   return { message: buffer.buffer, session };
 };
 
-export const unpackBuffer = (arrayBuffer: ArrayBuffer) => {
+export const decodeBuffer = (arrayBuffer: ArrayBuffer) => {
   const buffer = Buffer.from(arrayBuffer);
   // const sign = buffer.toString('utf8', 0, 8).replace(/\0/g, '');
   // const cmd = buffer.readUint32BE(8);

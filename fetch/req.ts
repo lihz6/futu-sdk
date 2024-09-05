@@ -2,77 +2,91 @@ import * as proto from 'futu-sdk/proto';
 
 export default {
   // 全局协议
+  /**< 初始化连接 */
   InitWebSocket: {
     cmd: 1,
     name: proto.InitWebSocket,
     description: '初始化连接',
-  } /**< 初始化连接 */,
+  },
+  /**< 获取全局状态 */
   GetGlobalState: {
     cmd: 1002,
     name: proto.GetGlobalState,
     description: '获取全局状态',
-  } /**< 获取全局状态 */,
+  },
+  /**< 心跳 */
   KeepAlive: {
     cmd: 1004,
     name: proto.KeepAlive,
     description: '心跳',
-  } /**< 心跳 */,
+  },
+  /**< 获取用户信息 */
   GetUserInfo: {
     cmd: 1005,
     name: proto.GetUserInfo,
     description: '获取用户信息',
-  } /**< 获取用户信息 */,
+  },
+  /**< 获取延迟统计 */
   GetDelayStatistics: {
     cmd: 1007,
     name: proto.GetDelayStatistics,
     description: '获取延迟统计',
-  } /**< 获取延迟统计 */,
+  },
   // 行情-实时数据协议
+  /**< 订阅或者反订阅 */
   QotSub: {
     cmd: 3001,
     name: proto.Qot_Sub,
     description: '订阅或者反订阅',
-  } /**< 订阅或者反订阅 */,
+  },
+  /**< 注册推送 */
   QotRegQotPush: {
     cmd: 3002,
     name: proto.Qot_RegQotPush,
     description: '注册推送',
-  } /**< 注册推送 */,
+  },
+  /**< 获取订阅信息 */
   QotGetSubInfo: {
     cmd: 3003,
     name: proto.Qot_GetSubInfo,
     description: '获取订阅信息',
-  } /**< 获取订阅信息 */,
+  },
+  /**< 获取基本行情 */
   QotGetBasicQot: {
     cmd: 3004,
     name: proto.Qot_GetBasicQot,
     description: '获取基本行情',
-  } /**< 获取基本行情 */,
+  },
+  /**< 获取K线 */
   QotGetKL: {
     cmd: 3006,
     name: proto.Qot_GetKL,
     description: '获取K线',
-  } /**< 获取K线 */,
+  },
+  /**< 获取分时 */
   QotGetRT: {
     cmd: 3008,
     name: proto.Qot_GetRT,
     description: '获取分时',
-  } /**< 获取分时 */,
+  },
+  /**< 获取逐笔 */
   QotGetTicker: {
     cmd: 3010,
     name: proto.Qot_GetTicker,
     description: '获取逐笔',
-  } /**< 获取逐笔 */,
+  },
+  /**< 获取买卖盘 */
   QotGetOrderBook: {
     cmd: 3012,
     name: proto.Qot_GetOrderBook,
     description: '获取买卖盘',
-  } /**< 获取买卖盘 */,
+  },
+  /**< 获取经纪队列 */
   QotGetBroker: {
     cmd: 3014,
     name: proto.Qot_GetBroker,
     description: '获取经纪队列',
-  } /**< 获取经纪队列 */,
+  },
 
   //	行情-历史数据协议
   QotGetHistoryKL: {

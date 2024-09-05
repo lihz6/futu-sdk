@@ -1,8 +1,8 @@
 ## 说明
 
-本 SDK 用于对接[富途 OpenAPI 量化接口](https://openapi.futunn.com/futu-api-doc/intro/intro.html?lang=zh-cn)的网关程序 OpenD. 虽然富途官方提供了配套的[`futu-api`](https://www.npmjs.com/package/futu-api)，但如果你在使用 `futu-api` 过程中遇到了一些卡点，可以尝试选择[`futu-sdk`](https://www.npmjs.com/package/futu-sdk)来对接。这些卡点可能是：
+本 SDK 用于对接[富途 OpenAPI 量化接口](https://openapi.futunn.com/futu-api-doc/intro/intro.html?lang=zh-cn)的网关程序 OpenD. 虽然富途官方提供了配套的[`futu-api`](https://www.npmjs.com/package/futu-api)，但如果你在使用 `futu-api`过程中遇到了一些卡点，可以尝试选择[`futu-sdk`](https://www.npmjs.com/package/futu-sdk)来对接。这些卡点可能是：
 
-- 依赖缺失(如 `long`, `WebSocket`, `memcpy`)、不兼容(`node >=0.8 <=0.12`)或过于老旧(如 `bytebuffer`)
+- 依赖缺失(如`long`, `WebSocket`, `memcpy`)、不兼容(`node >=0.8 <=0.12`)或过于老旧(如 `bytebuffer`)
 - 模块化接口不一致(`commonjs` 与 `esm` 混用)
 - 缺少类型支持和提示等
 
@@ -18,7 +18,10 @@ $ npm install --save futu-sdk
 
 #### 2. 使用
 
-对应官方[获取交易业务账户列表](https://openapi.futunn.com/futu-api-doc/trade/get-acc-list.html)的例子，`futu-sdk`简化了连接逻辑和请求参数，提供了基于 `Promise` 的接口和类型支持。
+对应官方[获取交易业务账户列表](https://openapi.futunn.com/futu-api-doc/trade/get-acc-list.html)的例子，`futu-sdk`简化了建立连接逻辑，提供了基于`Promise`的接口和类型支持。其他接口的使用方式如此类推，需要特别注意的是`futu-sdk`统一简化了两个数据结构：
+
+- 请求参数：只需传入 `req`, 自动将 `req` 装箱为 `{ c2s: req }`;
+- 响应结果：直接使用 `res`, 自动将 `{ s2c: res }` 拆箱为 `res`.
 
 ```ts
 import { getWebRequest } from 'futu-sdk';
@@ -30,7 +33,3 @@ const { accList } = await webRequest.GetAccList({ userID: 0, needGeneralSecAccou
 
 console.log(accList);
 ```
-
-### 支持
-
-目前还有大部分接口未补充类型注释(见[fetch/index.ts](https://github.com/lihz6/futu-sdk/blob/master/fetch/index.ts)), 欢迎补充。
