@@ -22,6 +22,11 @@
     "url": "https://github.com/lihz6/futu-sdk/issues"
   },
   "homepage": "https://github.com/lihz6/futu-sdk",
+  "prettier": {
+    "printWidth": 120,
+    "singleQuote": true,
+    "arrowParens": "avoid"
+  },
   "tsup": {
     "format": [
       "esm",

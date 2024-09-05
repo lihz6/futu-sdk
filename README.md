@@ -33,4 +33,4 @@ console.log(accList);
 
 ### 支持
 
-如有任何使用问题，欢迎随时反馈。目前还有大部分接口未补充类型注释(见[fetch/](https://github.com/lihz6/futu-sdk/blob/master/fetch)), 也期望一起补充。
+目前还有大部分接口未补充类型注释(见[fetch/index.ts](https://github.com/lihz6/futu-sdk/blob/master/fetch/index.ts)), 欢迎补充。
