@@ -63,7 +63,7 @@ export class WebRequest {
    */
   InitWebSocket = (
     c2s: proto.InitWebSocket.IRequest['c2s'],
-    timeout = 5000
+    timeout = 5000,
   ): Promise<proto.InitWebSocket.IResponse['s2c']> => {
     return this.request(REQ.InitWebSocket, { c2s }, timeout);
   };
@@ -80,7 +80,7 @@ export class WebRequest {
    */
   GetAccList = (
     c2s: proto.Trd_GetAccList.IRequest['c2s'],
-    timeout = 5000
+    timeout = 5000,
   ): Promise<proto.Trd_GetAccList.IResponse['s2c']> => {
     return this.request(REQ.TrdGetAccList, { c2s }, timeout);
   };
@@ -90,7 +90,7 @@ export class WebRequest {
    */
   UnlockTrade = (
     c2s: proto.Trd_UnlockTrade.IRequest['c2s'],
-    timeout = 5000
+    timeout = 5000,
   ): Promise<proto.Trd_UnlockTrade.IResponse['s2c']> => {
     return this.request(REQ.TrdUnlockTrade, { c2s }, timeout);
   };
@@ -99,7 +99,7 @@ export class WebRequest {
    * @param [in] stReq 请求包，具体字段请参考Trd_SubAccPush.proto协议
    */
   SubAccPush = (
-    c2s: proto.Trd_SubAccPush.IRequest['c2s']
+    c2s: proto.Trd_SubAccPush.IRequest['c2s'],
   ): Generator<Promise<proto.Trd_SubAccPush.IResponse['s2c']>> => {
     return this.subscribe(REQ.TrdSubAccPush, { c2s });
   };
@@ -109,7 +109,7 @@ export class WebRequest {
    */
   GetFunds = (
     c2s: proto.Trd_GetFunds.IRequest['c2s'],
-    timeout = 5000
+    timeout = 5000,
   ): Promise<proto.Trd_GetFunds.IResponse['s2c']> => {
     return this.request(REQ.TrdGetFunds, { c2s }, timeout);
   };
@@ -119,7 +119,7 @@ export class WebRequest {
    */
   GetPositionList = (
     c2s: proto.Trd_GetPositionList.IRequest['c2s'],
-    timeout = 5000
+    timeout = 5000,
   ): Promise<proto.Trd_GetPositionList.IResponse['s2c']> => {
     return this.request(REQ.TrdGetPositionList, { c2s }, timeout);
   };
@@ -129,7 +129,7 @@ export class WebRequest {
    */
   GetMaxTrdQtys = (
     c2s: proto.Trd_GetMaxTrdQtys.IRequest['c2s'],
-    timeout = 5000
+    timeout = 5000,
   ): Promise<proto.Trd_GetMaxTrdQtys.IResponse['s2c']> => {
     return this.request(REQ.TrdGetMaxTrdQtys, { c2s }, timeout);
   };
@@ -139,7 +139,7 @@ export class WebRequest {
    */
   GetOrderList = (
     c2s: proto.Trd_GetOrderList.IRequest['c2s'],
-    timeout = 5000
+    timeout = 5000,
   ): Promise<proto.Trd_GetOrderList.IResponse['s2c']> => {
     return this.request(REQ.TrdGetOrderList, { c2s }, timeout);
   };
@@ -149,7 +149,7 @@ export class WebRequest {
    */
   PlaceOrder = (
     c2s: proto.Trd_PlaceOrder.IRequest['c2s'],
-    timeout = 5000
+    timeout = 5000,
   ): Promise<proto.Trd_PlaceOrder.IResponse['s2c']> => {
     return this.request(REQ.TrdPlaceOrder, { c2s }, timeout);
   };
@@ -159,7 +159,7 @@ export class WebRequest {
    */
   ModifyOrder = (
     c2s: proto.Trd_ModifyOrder.IRequest['c2s'],
-    timeout = 5000
+    timeout = 5000,
   ): Promise<proto.Trd_ModifyOrder.IResponse['s2c']> => {
     return this.request(REQ.TrdModifyOrder, { c2s }, timeout);
   };
@@ -169,7 +169,7 @@ export class WebRequest {
    */
   GetOrderFillList = (
     c2s: proto.Trd_GetOrderFillList.IRequest['c2s'],
-    timeout = 5000
+    timeout = 5000,
   ): Promise<proto.Trd_GetOrderFillList.IResponse['s2c']> => {
     return this.request(REQ.TrdGetOrderFillList, { c2s }, timeout);
   };
@@ -179,7 +179,7 @@ export class WebRequest {
    */
   GetHistoryOrderList = (
     c2s: proto.Trd_GetHistoryOrderList.IRequest['c2s'],
-    timeout = 5000
+    timeout = 5000,
   ): Promise<proto.Trd_GetHistoryOrderList.IResponse['s2c']> => {
     return this.request(REQ.TrdGetHistoryOrderList, { c2s }, timeout);
   };
@@ -189,7 +189,7 @@ export class WebRequest {
    */
   GetHistoryOrderFillList = (
     c2s: proto.Trd_GetHistoryOrderFillList.IRequest['c2s'],
-    timeout = 5000
+    timeout = 5000,
   ): Promise<proto.Trd_GetHistoryOrderFillList.IResponse['s2c']> => {
     return this.request(REQ.TrdGetHistoryOrderFillList, { c2s }, timeout);
   };
@@ -199,7 +199,7 @@ export class WebRequest {
    */
   GetMarginRatio = (
     c2s: proto.Trd_GetMarginRatio.IRequest['c2s'],
-    timeout = 5000
+    timeout = 5000,
   ): Promise<proto.Trd_GetMarginRatio.IResponse['s2c']> => {
     return this.request(REQ.TrdGetMarginRatio, { c2s }, timeout);
   };
@@ -210,7 +210,7 @@ export class WebRequest {
    */
   GetOrderFee = (
     c2s: proto.Trd_GetOrderFee.IRequest['c2s'],
-    timeout = 5000
+    timeout = 5000,
   ): Promise<proto.Trd_GetOrderFee.IResponse['s2c']> => {
     return this.request(REQ.TrdGetOrderFee, { c2s }, timeout);
   };
@@ -221,7 +221,7 @@ export class WebRequest {
    */
   GetGlobalState = (
     c2s: proto.GetGlobalState.IRequest['c2s'],
-    timeout = 5000
+    timeout = 5000,
   ): Promise<proto.GetGlobalState.IResponse['s2c']> => {
     return this.request(REQ.GetGlobalState, { c2s }, timeout);
   };
@@ -231,7 +231,7 @@ export class WebRequest {
    */
   RegQotPush = (
     c2s: proto.Qot_RegQotPush.IRequest['c2s'],
-    timeout = 5000
+    timeout = 5000,
   ): Promise<proto.Qot_RegQotPush.IResponse['s2c']> => {
     return this.request(REQ.QotRegQotPush, { c2s }, timeout);
   };
@@ -241,7 +241,7 @@ export class WebRequest {
    */
   GetSubInfo = (
     c2s: proto.GetUserInfo.IRequest['c2s'],
-    timeout = 5000
+    timeout = 5000,
   ): Promise<proto.Qot_GetSubInfo.IResponse['s2c']> => {
     return this.request(REQ.QotGetSubInfo, { c2s }, timeout);
   };
@@ -251,7 +251,7 @@ export class WebRequest {
    */
   GetTicker = (
     c2s: proto.Qot_GetTicker.IRequest['c2s'],
-    timeout = 5000
+    timeout = 5000,
   ): Promise<proto.Qot_GetTicker.IResponse['s2c']> => {
     return this.request(REQ.QotGetTicker, { c2s }, timeout);
   };
@@ -261,7 +261,7 @@ export class WebRequest {
    */
   GetBasicQot = (
     c2s: proto.Qot_GetBasicQot.IRequest['c2s'],
-    timeout = 5000
+    timeout = 5000,
   ): Promise<proto.Qot_GetBasicQot.IResponse['s2c']> => {
     return this.request(REQ.QotGetBasicQot, { c2s }, timeout);
   };
@@ -271,7 +271,7 @@ export class WebRequest {
    */
   GetOrderBook = (
     c2s: proto.Qot_GetOrderBook.IRequest['c2s'],
-    timeout = 5000
+    timeout = 5000,
   ): Promise<proto.Qot_GetOrderBook.IResponse['s2c']> => {
     return this.request(REQ.QotGetOrderBook, { c2s }, timeout);
   };
@@ -295,7 +295,7 @@ export class WebRequest {
    */
   GetBroker = (
     c2s: proto.Qot_GetBroker.IRequest['c2s'],
-    timeout = 5000
+    timeout = 5000,
   ): Promise<proto.Qot_GetBroker.IResponse['s2c']> => {
     return this.request(REQ.QotGetBroker, { c2s }, timeout);
   };
@@ -305,7 +305,7 @@ export class WebRequest {
    */
   RequestRehab = (
     c2s: proto.Qot_RequestRehab.IRequest['c2s'],
-    timeout = 5000
+    timeout = 5000,
   ): Promise<proto.Qot_RequestRehab.IResponse['s2c']> => {
     return this.request(REQ.QotRequestRehab, { c2s }, timeout);
   };
@@ -315,7 +315,7 @@ export class WebRequest {
    */
   RequestHistoryKL = (
     c2s: proto.Qot_RequestHistoryKL.IRequest['c2s'],
-    timeout = 5000
+    timeout = 5000,
   ): Promise<proto.Qot_RequestHistoryKL.IResponse['s2c']> => {
     return this.request(REQ.QotRequestHistoryKL, { c2s }, timeout);
   };
@@ -325,7 +325,7 @@ export class WebRequest {
    */
   RequestHistoryKLQuota = (
     c2s: proto.Qot_RequestHistoryKLQuota.IRequest['c2s'],
-    timeout = 5000
+    timeout = 5000,
   ): Promise<proto.Qot_RequestHistoryKLQuota.IResponse['s2c']> => {
     return this.request(REQ.QotRequestHistoryKLQuota, { c2s }, timeout);
   };
@@ -335,7 +335,7 @@ export class WebRequest {
    */
   GetStaticInfo = (
     c2s: proto.Qot_GetStaticInfo.IRequest['c2s'],
-    timeout = 5000
+    timeout = 5000,
   ): Promise<proto.Qot_GetStaticInfo.IResponse['s2c']> => {
     return this.request(REQ.QotGetStaticInfo, { c2s }, timeout);
   };
@@ -345,7 +345,7 @@ export class WebRequest {
    */
   GetSecuritySnapshot = (
     c2s: proto.Qot_GetSecuritySnapshot.IRequest['c2s'],
-    timeout = 5000
+    timeout = 5000,
   ): Promise<proto.Qot_GetSecuritySnapshot.IResponse['s2c']> => {
     return this.request(REQ.QotGetSecuritySnapshot, { c2s }, timeout);
   };
@@ -355,7 +355,7 @@ export class WebRequest {
    */
   GetPlateSet = (
     c2s: proto.Qot_GetPlateSet.IRequest['c2s'],
-    timeout = 5000
+    timeout = 5000,
   ): Promise<proto.Qot_GetPlateSet.IResponse['s2c']> => {
     return this.request(REQ.QotGetPlateSet, { c2s }, timeout);
   };
@@ -365,7 +365,7 @@ export class WebRequest {
    */
   GetPlateSecurity = (
     c2s: proto.Qot_GetPlateSecurity.IRequest['c2s'],
-    timeout = 5000
+    timeout = 5000,
   ): Promise<proto.Qot_GetPlateSecurity.IResponse['s2c']> => {
     return this.request(REQ.QotGetPlateSecurity, { c2s }, timeout);
   };
@@ -375,7 +375,7 @@ export class WebRequest {
    */
   GetReference = (
     c2s: proto.Qot_GetReference.IRequest['c2s'],
-    timeout = 5000
+    timeout = 5000,
   ): Promise<proto.Qot_GetReference.IResponse['s2c']> => {
     return this.request(REQ.QotGetReference, { c2s }, timeout);
   };
@@ -385,7 +385,7 @@ export class WebRequest {
    */
   GetOwnerPlate = (
     c2s: proto.Qot_GetOwnerPlate.IRequest['c2s'],
-    timeout = 5000
+    timeout = 5000,
   ): Promise<proto.Qot_GetOwnerPlate.IResponse['s2c']> => {
     return this.request(REQ.QotGetOwnerPlate, { c2s }, timeout);
   };
@@ -395,7 +395,7 @@ export class WebRequest {
    */
   GetHoldingChangeList = (
     c2s: proto.Qot_GetHoldingChangeList.IRequest['c2s'],
-    timeout = 5000
+    timeout = 5000,
   ): Promise<proto.Qot_GetHoldingChangeList.IResponse['s2c']> => {
     return this.request(REQ.QotGetHoldingChangeList, { c2s }, timeout);
   };
@@ -405,7 +405,7 @@ export class WebRequest {
    */
   GetOptionChain = (
     c2s: proto.Qot_GetOptionChain.IRequest['c2s'],
-    timeout = 5000
+    timeout = 5000,
   ): Promise<proto.Qot_GetOptionChain.IResponse['s2c']> => {
     return this.request(REQ.QotGetOptionChain, { c2s }, timeout);
   };
@@ -415,7 +415,7 @@ export class WebRequest {
    */
   GetWarrant = (
     c2s: proto.Qot_GetWarrant.IRequest['c2s'],
-    timeout = 5000
+    timeout = 5000,
   ): Promise<proto.Qot_GetWarrant.IResponse['s2c']> => {
     return this.request(REQ.QotGetWarrant, { c2s }, timeout);
   };
@@ -425,7 +425,7 @@ export class WebRequest {
    */
   GetCapitalFlow = (
     c2s: proto.Qot_GetCapitalFlow.IRequest['c2s'],
-    timeout = 5000
+    timeout = 5000,
   ): Promise<proto.Qot_GetCapitalFlow.IResponse['s2c']> => {
     return this.request(REQ.QotGetCapitalFlow, { c2s }, timeout);
   };
@@ -435,7 +435,7 @@ export class WebRequest {
    */
   GetCapitalDistribution = (
     c2s: proto.Qot_GetCapitalDistribution.IRequest['c2s'],
-    timeout = 5000
+    timeout = 5000,
   ): Promise<proto.Qot_GetCapitalDistribution.IResponse['s2c']> => {
     return this.request(REQ.QotGetCapitalDistribution, { c2s }, timeout);
   };
@@ -445,7 +445,7 @@ export class WebRequest {
    */
   GetUserSecurity = (
     c2s: proto.Qot_GetUserSecurity.IRequest['c2s'],
-    timeout = 5000
+    timeout = 5000,
   ): Promise<proto.Qot_GetUserSecurity.IResponse['s2c']> => {
     return this.request(REQ.QotGetUserSecurity, { c2s }, timeout);
   };
@@ -455,7 +455,7 @@ export class WebRequest {
    */
   ModifyUserSecurity = (
     c2s: proto.Qot_ModifyUserSecurity.IRequest['c2s'],
-    timeout = 5000
+    timeout = 5000,
   ): Promise<proto.Qot_ModifyUserSecurity.IResponse['s2c']> => {
     return this.request(REQ.QotModifyUserSecurity, { c2s }, timeout);
   };
@@ -465,7 +465,7 @@ export class WebRequest {
    */
   StockFilter = (
     c2s: proto.Qot_StockFilter.IRequest['c2s'],
-    timeout = 5000
+    timeout = 5000,
   ): Promise<proto.Qot_StockFilter.IResponse['s2c']> => {
     return this.request(REQ.QotStockFilter, { c2s }, timeout);
   };
@@ -475,7 +475,7 @@ export class WebRequest {
    */
   GetCodeChange = (
     c2s: proto.Qot_GetCodeChange.IRequest['c2s'],
-    timeout = 5000
+    timeout = 5000,
   ): Promise<proto.Qot_GetCodeChange.IResponse['s2c']> => {
     return this.request(REQ.QotGetCodeChange, { c2s }, timeout);
   };
@@ -485,7 +485,7 @@ export class WebRequest {
    */
   GetIpoList = (
     c2s: proto.Qot_GetIpoList.IRequest['c2s'],
-    timeout = 5000
+    timeout = 5000,
   ): Promise<proto.Qot_GetIpoList.IResponse['s2c']> => {
     return this.request(REQ.QotGetIpoList, { c2s }, timeout);
   };
@@ -495,7 +495,7 @@ export class WebRequest {
    */
   GetFutureInfo = (
     c2s: proto.Qot_GetFutureInfo.IRequest['c2s'],
-    timeout = 5000
+    timeout = 5000,
   ): Promise<proto.Qot_GetFutureInfo.IResponse['s2c']> => {
     return this.request(REQ.QotGetFutureInfo, { c2s }, timeout);
   };
@@ -505,7 +505,7 @@ export class WebRequest {
    */
   RequestTradeDate = (
     c2s: proto.Qot_RequestTradeDate.IRequest['c2s'],
-    timeout = 5000
+    timeout = 5000,
   ): Promise<proto.Qot_RequestTradeDate.IResponse['s2c']> => {
     return this.request(REQ.QotRequestTradeDate, { c2s }, timeout);
   };
@@ -515,7 +515,7 @@ export class WebRequest {
    */
   SetPriceReminder = (
     c2s: proto.Qot_SetPriceReminder.IRequest['c2s'],
-    timeout = 5000
+    timeout = 5000,
   ): Promise<proto.Qot_SetPriceReminder.IResponse['s2c']> => {
     return this.request(REQ.QotSetPriceReminder, { c2s }, timeout);
   };
@@ -525,7 +525,7 @@ export class WebRequest {
    */
   GetPriceReminder = (
     c2s: proto.Qot_GetPriceReminder.IRequest['c2s'],
-    timeout = 5000
+    timeout = 5000,
   ): Promise<proto.Qot_GetPriceReminder.IResponse['s2c']> => {
     return this.request(REQ.QotGetPriceReminder, { c2s }, timeout);
   };
@@ -535,7 +535,7 @@ export class WebRequest {
    */
   GetUserSecurityGroup = (
     c2s: proto.Qot_GetUserSecurityGroup.IRequest['c2s'],
-    timeout = 5000
+    timeout = 5000,
   ): Promise<proto.Qot_GetUserSecurityGroup.IResponse['s2c']> => {
     return this.request(REQ.QotGetUserSecurityGroup, { c2s }, timeout);
   };
@@ -545,7 +545,7 @@ export class WebRequest {
    */
   GetMarketState = (
     c2s: proto.Qot_GetMarketState.IRequest['c2s'],
-    timeout = 5000
+    timeout = 5000,
   ): Promise<proto.Qot_GetMarketState.IResponse['s2c']> => {
     return this.request(REQ.QotGetMarketState, { c2s }, timeout);
   };
@@ -555,7 +555,7 @@ export class WebRequest {
    */
   GetOptionExpirationDate = (
     c2s: proto.Qot_GetOptionExpirationDate.IRequest['c2s'],
-    timeout = 5000
+    timeout = 5000,
   ): Promise<proto.Qot_GetOptionExpirationDate.IResponse['s2c']> => {
     return this.request(REQ.QotGetOptionExpirationDate, { c2s }, timeout);
   };

@@ -1,5 +1,5 @@
 export function* generator<T>(
-  executor: (resolve: (value: T) => void, reject: (reason?: any) => void) => Promise<() => void>
+  executor: (resolve: (value: T) => void, reject: (reason?: any) => void) => Promise<() => void>,
 ) {
   type Executor<T> = { resolve: (value: T) => void; reject: (reason?: any) => void };
   const error: { reason?: any; rejected?: boolean } = {};
@@ -20,7 +20,7 @@ export function* generator<T>(
           item.reject(reason);
         }
       }
-    }
+    },
   );
 
   try {

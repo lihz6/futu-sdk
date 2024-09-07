@@ -22,6 +22,5 @@ export const decodeBuffer = (arrayBuffer: ArrayBuffer) => {
   const errorCode = buffer.readInt32BE(20);
   const errorMessage = buffer.toString('utf8', 24, 44).replace(/\0/g, '');
   const protobuf = new Uint8Array(buffer.subarray(44));
-  new Uint8Array(buffer.subarray(44));
   return { session, message: { errorCode, errorMessage, protobuf } };
 };

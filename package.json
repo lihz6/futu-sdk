@@ -41,7 +41,8 @@
     "proto": "pbjs -t static-module -w es6 node_modules/futu-api/proto/*.proto | tee node_modules/futu-sdk/dist/proto.js | pbts -o node_modules/futu-sdk/dist/proto.d.ts -",
     "build": "tsup --external futu-sdk/proto --entry.index index.ts --entry.proto node_modules/futu-sdk/dist/proto.js",
     "setup": "npm run proto && npm run build && rsync -a node_modules/futu-api/proto/*.proto dist/files",
-    "tests": "jest # WEBSOCKET_KEY=9d261112869397f0 npm run tests"
+    "tests": "jest # WEBSOCKET_KEY=9d261112869397f0 npm run tests",
+    "write": "prettier --write '**/*.{cjs,ts,md,json}'"
   },
   "keywords": [
     "富途",
@@ -69,20 +70,23 @@
   "description": "futu-api 的高性能精简易用版；基于*.proto静态编译，提供高性能的多层封装但层层开放的易用接口，获取最原始最完整的量化数据；相较于Python, nodejs更接近Web, 从而轻而易举搭建一个可视化交易站点，这是进行可控量化交易的不二选择。",
   "dependencies": {
     "@types/long": "^5.0.0",
-    "@types/ws": "^8.5.12",
     "bufferutil": "^4.0.8",
     "long": "^5.2.3",
-    "protobufjs": "^7.4.0",
-    "ws": "^8.18.0"
+    "protobufjs": "^7.4.0"
   },
   "devDependencies": {
     "@types/jest": "^29.5.12",
     "futu-api": "^8.5.4508",
     "futu-sdk": "^0.2.0",
     "jest": "^29.7.0",
+    "prettier": "^3.3.3",
     "protobufjs-cli": "^1.1.3",
     "ts-jest": "^29.2.5",
     "tsup": "^8.2.4",
     "typescript": "^5.5.4"
+  },
+  "peerDependencies": {
+    "@types/ws": "^8.5.12",
+    "ws": "^8.18.0"
   }
 }
