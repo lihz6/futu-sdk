@@ -1,58 +1,81 @@
+import crypto from 'crypto';
 import WebSocket from 'ws';
-import { encodeBuffer, decodeBuffer, getWsUrl, WsUrl } from './utils';
-import { WebRequest } from './fetch';
+import { encodeBuffer, decodeBuffer, WsUrl } from './utils';
+import { WebRequest, RequestFn } from './fetch';
 
 export interface IWebRequest extends Omit<WebRequest, 'InitWebSocket'> {}
 
-export const getWebRequest = (wsUrl: WsUrl): IWebRequest => {
-  const { url, secret } = getWsUrl(wsUrl);
-  const sessionResolve = new Map<number, (result: any) => void>();
+/**
+ * getFutuApi 内部实例化 WebSocket 连接，并基于 WebSocket 封装了的查询对象 WebRequest, 你可以使用 `webRequest` 查询各种接口，
+ * 也可以使用 `webSocket` 来关闭连接(`webSocket.close()`)和实现事件监听(如 onclose/onopen/onmessage等)
+ *
+ * Example:
+ *
+ * ```ts
+ * import { getFutuApi } from 'futu-sdk';
+ * // import { Trd_Common } from 'futu-sdk/proto';
+ *
+ * const { webRequest, webSocket } = getFutuApi('ws://127.0.0.1:33333', '9d261112869397f0');
+ * try {
+ *   const { accList } = (await webRequest.GetAccList({ userID: 0, needGeneralSecAccount: true })) || {};
+ *   console.log({ accList });
+ * } finally {
+ *   webSocket.close();
+ * }
+ * ```
+ * @param wsUrl 连接本地 WebSocket 的地址，如 `ws://127.0.0.1:33333`
+ * @param key WebSocket 密钥，每次启动 OpenD 可能都不一样
+ * @returns `{ webRequest: WebRequest, webSocket: WebSocket }`
+ */
+export const getFutuApi = (wsUrl: string, key: string) => {
+  const sessionCallback = new Map<number, (result: any) => void>();
+  const webSocket = new WebSocket(wsUrl);
 
-  const websocket = new WebSocket(url);
-  websocket.binaryType = 'arraybuffer';
+  webSocket.binaryType = 'arraybuffer';
 
-  let closeEvent: WebSocket.CloseEvent;
-
-  const getWebRequest = (WebSocketInited: Promise<boolean>) => {
-    return new WebRequest(async (cmd, protobuf) => {
-      const { session, message } = encodeBuffer(cmd, protobuf);
-      if ((await WebSocketInited) && closeEvent) {
-        const { code, reason, type } = closeEvent;
-        throw new Error(`closed, ${JSON.stringify({ code, reason, type })}`);
-      }
-      try {
-        return await new Promise<any>((resolve, reject) => {
-          sessionResolve.set(session, resolve);
-          websocket.send(message);
-          setTimeout(() => {
-            reject(new Error('timeout'));
-          }, 10 * 1000);
-        });
-      } finally {
-        sessionResolve.delete(session);
-      }
-    });
+  const requestFn: RequestFn = (cmd, protobuf, callback) => {
+    const { session, message } = encodeBuffer(cmd, protobuf);
+    if (webSocket.readyState !== WebSocket.OPEN) {
+      throw new Error('WebSocket closed');
+    }
+    webSocket.send(message);
+    sessionCallback.set(session, callback);
+    return () => {
+      sessionCallback.delete(session);
+    };
   };
 
-  const webSocketInited = new Promise<boolean>((resolve, reject) => {
-    websocket.onopen = () => {
-      getWebRequest(Promise.resolve(true))
-        .InitWebSocket({ websocketKey: secret, programmingLanguage: 'JavaScript' })
-        .then(() => resolve(true));
-    };
+  const requestFnPromise = new Promise<RequestFn>((resolve, reject) => {
+    webSocket.addEventListener('open', () => {
+      new WebRequest(Promise.resolve(requestFn))
+        .InitWebSocket({
+          websocketKey: key ? crypto.createHash('md5').update(key).digest('hex') : '',
+          programmingLanguage: 'JavaScript',
+        })
+        .then(() => resolve(requestFn))
+        .catch(reject);
+    });
 
-    websocket.onmessage = event => {
+    webSocket.addEventListener('message', event => {
       const { session, message } = decodeBuffer(event.data as ArrayBuffer);
-      sessionResolve.get(session)?.(message);
-    };
+      sessionCallback.get(session)?.(message);
+    });
 
-    websocket.onerror = error => {
-      reject(new Error(error.message));
-    };
-
-    websocket.onclose = event => {
-      closeEvent = event;
-    };
+    webSocket.addEventListener('close', event => {
+      webSocket.removeAllListeners('message');
+      webSocket.removeAllListeners('close');
+      webSocket.removeAllListeners('open');
+      reject(event);
+    });
   });
-  return getWebRequest(webSocketInited);
+
+  return { webSocket, webRequest: new WebRequest(requestFnPromise) as IWebRequest };
+};
+
+/**
+ * @deprecated 已废弃，请使用 `const { webRequest } = getFutuApi(`ws://${host}:${port}`, key);`
+ */
+export const getWebRequest = ({ host = '127.0.0.1', port = 33333, key }: WsUrl): IWebRequest => {
+  const { webRequest } = getFutuApi(`ws://${host}:${port}`, key);
+  return webRequest;
 };
